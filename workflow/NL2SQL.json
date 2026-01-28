@@ -1,0 +1,129 @@
+{
+  "name": "NLtoSQL Uygulaması",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -224,
+        -48
+      ],
+      "id": "edb8d09d-b305-498d-b8ed-e737dd869502",
+      "name": "When chat message received",
+      "webhookId": "983eda4a-7061-47ff-bff8-78fc7fd43b15"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Sen bir PostgreSQL uzmanısın.\n\nKullanıcının mesajını geçerli bir PostgreSQL SQL sorgusuna çevir.\n\nKurallar:\n- Sadece SQL döndür\n- Markdown kullanma\n- Açıklama yazma\n- Yalnızca SELECT sorgusu üret\n- PostgreSQL uyumlu olmalı\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -32,
+        -48
+      ],
+      "id": "661f6f84-c279-47a4-b543-58a09283c972",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        144
+      ],
+      "id": "73c39910-8229-42bd-8d44-6b4971cc1635",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kXTg7SgU89fQbXEx",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        160,
+        144
+      ],
+      "id": "e1f98384-51a0-443f-a014-84a3521c0185",
+      "name": "Execute a SQL query in Postgres",
+      "notesInFlow": false,
+      "credentials": {
+        "postgres": {
+          "id": "uVjgzhJpNaRwO6Ol",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query in Postgres": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "556224de-98c9-4078-a3a3-df5ef8954e5a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4824972d419ffab08827f6802e062270762903d63596334116eaf93e6ecf8113"
+  },
+  "id": "LQj3krjFq8EjhLYgvfv45",
+  "tags": []
+}
