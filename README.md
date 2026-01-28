@@ -48,7 +48,7 @@ Workflow aşağıdaki adımlardan oluşur:
 
 Bu proje öğrenme ve otomasyon mantığını kavrama amacıyla hazırlanmıştır.  
 Production ortamları için ek güvenlik ve hata yönetimi önerilir.
-
+.
 ---
 
 ## 📄 Lisans
