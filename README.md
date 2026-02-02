@@ -1,110 +1,63 @@
-# 🧠 n8n NL2SQL (Natural Language to SQL) Uygulaması
+8n NL2SQL (Natural Language to SQL) Otomasyonu
 
-Bu proje, **n8n** ve **LLM (Google Gemini)** kullanılarak geliştirilmiş basit bir **NL2SQL (Doğal Dil → SQL)** uygulamasıdır.  
-Amaç, kullanıcının doğal dilde sorduğu soruları **geçerli ve güvenli PostgreSQL SELECT sorgularına** dönüştürmek ve sonucu veritabanından almaktır.
+Bu proje, n8n kullanılarak oluşturulmuş yapay zekâ destekli bir NL2SQL (Natural Language to SQL) otomasyonudur.
 
----
+Kullanıcının doğal dilde yazdığı soruları alır, PostgreSQL uyumlu SELECT SQL sorgularına dönüştürür ve sonucu veritabanından otomatik olarak getirir.
 
-## 🚀 Ne yapar?
+🚀 Ne yapar?
 
-- Kullanıcıdan **doğal dilde** bir soru alır  
-- Soruyu **PostgreSQL uyumlu SELECT SQL sorgusuna** çevirir  
-- Üretilen SQL sorgusunu PostgreSQL üzerinde çalıştırır  
-- Sorgu sonucunu kullanıcıya döndürür  
+Kullanıcıdan doğal dilde sorgu alır (chat üzerinden)
 
-Örnek:
+Yapay zekâ ile sorguyu PostgreSQL SQL diline çevirir
 
-```sql
-SELECT COUNT(*) 
-FROM users 
-WHERE created_at >= NOW() - INTERVAL '30 days';
-🧠 Nasıl Çalışır?
+Sadece SELECT sorguları üretir
 
-Workflow aşağıdaki adımlardan oluşur:
+Oluşturulan SQL sorgusunu PostgreSQL üzerinde çalıştırır
 
-Chat Trigger
-Kullanıcıdan doğal dilde mesaj alır
+Sonuçları kullanıcıya döner
 
-AI Agent (LangChain)
-Doğal dili SQL’e çeviren ana bileşendir
+🧠 Nasıl çalışır?
 
-Sadece SQL üretir
+Chat Trigger ile kullanıcıdan mesaj alınır
 
-Markdown veya açıklama döndürmez
+AI Agent (LangChain), kullanıcı mesajını SQL’e çevirir
 
-Yalnızca SELECT sorgularına izin verir
+Google Gemini Chat Model, dil modeli olarak kullanılır
 
-PostgreSQL uyumludur
+AI Agent sadece geçerli PostgreSQL SELECT sorgusu üretir
 
-Google Gemini Chat Model
+Üretilen sorgu Postgres Tool ile veritabanında çalıştırılır
 
-LLM olarak kullanılır
-
-temperature = 0 ile deterministik sonuçlar üretir
-
-PostgreSQL Tool
-
-Üretilen SQL sorgusunu PostgreSQL veritabanında çalıştırır
-
-Sonucu workflow çıktısı olarak döndürür
 🛠 Kullanılan Teknolojiler
 
 n8n
 
-LangChain (n8n Agent Node)
+LangChain (AI Agent)
 
-Google Gemini (PaLM) API
+Google Gemini (PaLM) Chat Model
 
 PostgreSQL
 
-NL2SQL (Natural Language to SQL)
+NL2SQL yaklaşımı
 
-⚙️ Nasıl Kullanılır?
+⚙️ Nasıl kullanılır?
 
 Bu repoyu klonlayın veya indirin
 
-Workflow JSON dosyasını n8n içerisine import edin
+Workflow JSON dosyasını n8n’e import edin
 
 Google Gemini (PaLM) API Key oluşturun
 
 API Key’i n8n Credentials bölümüne ekleyin
 
-PostgreSQL bağlantı bilgilerinizi Postgres Credentials olarak tanımlayın
-
-Veritabanı şemanızın sorgulara uygun olduğundan emin olun
+PostgreSQL veritabanı bilgilerinizi n8n Credentials’a tanımlayın
 
 Workflow’u aktif hale getirin
 
-Chat üzerinden doğal dilde sorular sormaya başlayın
+Chat üzerinden doğal dilde sorgu gönderin
 
-⚠️ Notlar
+📁 Workflow Dosyası
 
-Güvenlik amacıyla yalnızca SELECT sorgularına izin verilmektedir
+workflow/nl2sql-n8n.json
 
-INSERT, UPDATE, DELETE gibi işlemler bilinçli olarak engellenmiştir
-
-Production ortamları için:
-
-Query validation
-
-Schema bazlı yetkilendirme
-
-Rate limiting
-
-Logging & monitoring
-
-eklenmesi önerilir.
-
-📌 Kullanım Senaryoları
-
-Teknik olmayan kullanıcılar için veri sorgulama
-
-Chat tabanlı veri keşfi
-
-BI / dashboard öncesi hızlı analiz
-
-Internal tool ve prototip geliştirme
-
-📄 Lisans
-
-MIT License
+Oluşturan: SwEnesAda 🚀
