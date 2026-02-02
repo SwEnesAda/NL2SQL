@@ -1,56 +1,110 @@
-# 🔔 n8n GitHub Issue Takip Otomasyonu
+# 🧠 n8n NL2SQL (Natural Language to SQL) Uygulaması
 
-Bu proje, **n8n** kullanılarak oluşturulmuş basit bir **GitHub Issue takip otomasyonudur**.  
-Amaç, belirli bir GitHub reposundaki issue’ları otomatik olarak kontrol etmek ve gerekli durumlarda issue’lara yorum eklemektir.
+Bu proje, **n8n** ve **LLM (Google Gemini)** kullanılarak geliştirilmiş basit bir **NL2SQL (Doğal Dil → SQL)** uygulamasıdır.  
+Amaç, kullanıcının doğal dilde sorduğu soruları **geçerli ve güvenli PostgreSQL SELECT sorgularına** dönüştürmek ve sonucu veritabanından almaktır.
 
 ---
 
 ## 🚀 Ne yapar?
 
-- Belirtilen GitHub reposunu belirli aralıklarla kontrol eder  
-- Repo içinde **issue (sorun)** olup olmadığını tespit eder  
-- Issue varsa, ilgili issue’ya **otomatik olarak yorum ekler**
+- Kullanıcıdan **doğal dilde** bir soru alır  
+- Soruyu **PostgreSQL uyumlu SELECT SQL sorgusuna** çevirir  
+- Üretilen SQL sorgusunu PostgreSQL üzerinde çalıştırır  
+- Sorgu sonucunu kullanıcıya döndürür  
 
----
+Örnek:
 
-## 🧠 Nasıl Çalışır?
+```sql
+SELECT COUNT(*) 
+FROM users 
+WHERE created_at >= NOW() - INTERVAL '30 days';
+🧠 Nasıl Çalışır?
 
 Workflow aşağıdaki adımlardan oluşur:
 
-1. **Schedule Trigger** ile workflow belirli aralıklarla çalışır  
-2. **HTTP Request (GitHub API)** ile repository issue’ları çekilir  
-3. Gelen veri **Set node** ile sadeleştirilir  
-4. **IF node** ile issue olup olmadığı kontrol edilir  
-5. Issue varsa **otomatik yorum** eklenir  
+Chat Trigger
+Kullanıcıdan doğal dilde mesaj alır
 
----
+AI Agent (LangChain)
+Doğal dili SQL’e çeviren ana bileşendir
 
-## 🛠 Kullanılan Teknolojiler
+Sadece SQL üretir
 
-- n8n  
-- GitHub REST API  
-- GitHub Personal Access Token  
+Markdown veya açıklama döndürmez
 
----
+Yalnızca SELECT sorgularına izin verir
 
-## ⚙️ Nasıl Kullanılır?
+PostgreSQL uyumludur
 
-1. Bu repoyu klonlayın veya indirin  
-2. `github-issue-tracker-n8n.json` dosyasını **n8n** içerisine import edin  
-3. GitHub üzerinden bir **Personal Access Token** oluşturun  
-4. Token’ı **n8n Credentials** bölümüne ekleyin  
-5. Repo owner ve repo adını kendinize göre düzenleyin  
-6. Workflow’u **aktif** hale getirin  
+Google Gemini Chat Model
 
----
+LLM olarak kullanılır
 
-## ⚠️ Not
+temperature = 0 ile deterministik sonuçlar üretir
 
-Bu proje öğrenme ve otomasyon mantığını kavrama amacıyla hazırlanmıştır.  
-Production ortamları için ek güvenlik ve hata yönetimi önerilir.
-.
----
+PostgreSQL Tool
 
-## 📄 Lisans
+Üretilen SQL sorgusunu PostgreSQL veritabanında çalıştırır
+
+Sonucu workflow çıktısı olarak döndürür
+🛠 Kullanılan Teknolojiler
+
+n8n
+
+LangChain (n8n Agent Node)
+
+Google Gemini (PaLM) API
+
+PostgreSQL
+
+NL2SQL (Natural Language to SQL)
+
+⚙️ Nasıl Kullanılır?
+
+Bu repoyu klonlayın veya indirin
+
+Workflow JSON dosyasını n8n içerisine import edin
+
+Google Gemini (PaLM) API Key oluşturun
+
+API Key’i n8n Credentials bölümüne ekleyin
+
+PostgreSQL bağlantı bilgilerinizi Postgres Credentials olarak tanımlayın
+
+Veritabanı şemanızın sorgulara uygun olduğundan emin olun
+
+Workflow’u aktif hale getirin
+
+Chat üzerinden doğal dilde sorular sormaya başlayın
+
+⚠️ Notlar
+
+Güvenlik amacıyla yalnızca SELECT sorgularına izin verilmektedir
+
+INSERT, UPDATE, DELETE gibi işlemler bilinçli olarak engellenmiştir
+
+Production ortamları için:
+
+Query validation
+
+Schema bazlı yetkilendirme
+
+Rate limiting
+
+Logging & monitoring
+
+eklenmesi önerilir.
+
+📌 Kullanım Senaryoları
+
+Teknik olmayan kullanıcılar için veri sorgulama
+
+Chat tabanlı veri keşfi
+
+BI / dashboard öncesi hızlı analiz
+
+Internal tool ve prototip geliştirme
+
+📄 Lisans
 
 MIT License
