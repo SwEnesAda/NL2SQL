@@ -1,63 +1,38 @@
-n8n NL2SQL Otomasyonu
+# n8n NL2SQL Otomasyonu
 
-Bu proje, n8n kullanılarak oluşturulmuş basit bir NL2SQL (Natural Language to SQL) otomasyonudur.
+Bu proje, **n8n kullanılarak oluşturulmuş basit bir NL2SQL (Natural Language to SQL) otomasyonudur**.
 
-Kullanıcının doğal dilde yazdığı soruları alır ve PostgreSQL uyumlu SELECT SQL sorgularına dönüştürerek veritabanı üzerinden çalıştırır.
+## 🚀 Ne yapar?
+- Kullanıcıdan doğal dilde sorgu alır
+- Yapay zekâ ile sorguyu PostgreSQL SQL diline çevirir
+- Sadece SELECT sorguları üretir
+- Oluşturulan SQL sorgusunu PostgreSQL üzerinde çalıştırır
+- Sorgu sonucunu kullanıcıya döndürür
 
-🚀 Ne yapar?
+## 🧠 Nasıl çalışır?
+1. Chat Trigger ile workflow çalışır
+2. AI Agent (LangChain) kullanıcı mesajını alır
+3. Google Gemini Chat Model SQL üretir
+4. AI Agent yalnızca PostgreSQL uyumlu SELECT sorgusu döndürür
+5. Postgres Tool sorguyu veritabanında çalıştırır
 
-Kullanıcıdan chat üzerinden doğal dilde sorgu alır
+## 🛠 Kullanılan Teknolojiler
+- n8n
+- LangChain
+- Google Gemini (PaLM)
+- PostgreSQL
+- NL2SQL
 
-Yapay zekâ ile sorguyu PostgreSQL SQL diline çevirir
+## ⚙️ Nasıl kullanılır?
+1. Bu repoyu klonlayın veya indirin
+2. Workflow JSON dosyasını n8n’e import edin
+3. Google Gemini (PaLM) API Key oluşturun
+4. API Key’i n8n Credentials bölümüne ekleyin
+5. PostgreSQL bilgilerinizi n8n Credentials’a tanımlayın
+6. Workflow’u aktif hale getirin
+7. Chat üzerinden doğal dilde sorgu gönderin
 
-Sadece SELECT sorguları üretir
-
-Oluşturulan SQL sorgusunu PostgreSQL üzerinde çalıştırır
-
-Sorgu sonucunu kullanıcıya döndürür
-
-🧠 Nasıl çalışır?
-
-Chat Trigger ile kullanıcı mesajı alınır
-
-AI Agent (LangChain) kullanıcı mesajını analiz eder
-
-Google Gemini Chat Model SQL üretimi için kullanılır
-
-AI Agent yalnızca geçerli PostgreSQL SELECT sorgusu döndürür
-
-Üretilen sorgu Postgres Tool ile çalıştırılır
-
-🛠 Kullanılan Teknolojiler
-
-n8n
-
-LangChain AI Agent
-
-Google Gemini (PaLM) Chat Model
-
-PostgreSQL
-
-NL2SQL yaklaşımı
-
-⚙️ Nasıl kullanılır?
-
-Bu repoyu klonlayın veya indirin
-
-Workflow JSON dosyasını n8n’e import edin
-
-Google Gemini (PaLM) API Key oluşturun
-
-API Key’i n8n Credentials bölümüne ekleyin
-
-PostgreSQL bağlantı bilgilerini n8n Credentials’a tanımlayın
-
-Workflow’u aktif hale getirin
-
-Chat üzerinden doğal dilde SQL sorgusu gönderin
-
-📁 Workflow Dosyası
-
+## 📁 Workflow Dosyası
 workflow/nl2sql-n8n.json
 
-Oluşturan: SwEnesAda
+Oluşturan: **SwEnesAda**
