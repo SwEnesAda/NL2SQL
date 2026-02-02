@@ -1,12 +1,12 @@
-8n NL2SQL (Natural Language to SQL) Otomasyonu
+n8n NL2SQL Otomasyonu
 
-Bu proje, n8n kullanılarak oluşturulmuş yapay zekâ destekli bir NL2SQL (Natural Language to SQL) otomasyonudur.
+Bu proje, n8n kullanılarak oluşturulmuş basit bir NL2SQL (Natural Language to SQL) otomasyonudur.
 
-Kullanıcının doğal dilde yazdığı soruları alır, PostgreSQL uyumlu SELECT SQL sorgularına dönüştürür ve sonucu veritabanından otomatik olarak getirir.
+Kullanıcının doğal dilde yazdığı soruları alır ve PostgreSQL uyumlu SELECT SQL sorgularına dönüştürerek veritabanı üzerinden çalıştırır.
 
 🚀 Ne yapar?
 
-Kullanıcıdan doğal dilde sorgu alır (chat üzerinden)
+Kullanıcıdan chat üzerinden doğal dilde sorgu alır
 
 Yapay zekâ ile sorguyu PostgreSQL SQL diline çevirir
 
@@ -14,25 +14,25 @@ Sadece SELECT sorguları üretir
 
 Oluşturulan SQL sorgusunu PostgreSQL üzerinde çalıştırır
 
-Sonuçları kullanıcıya döner
+Sorgu sonucunu kullanıcıya döndürür
 
 🧠 Nasıl çalışır?
 
-Chat Trigger ile kullanıcıdan mesaj alınır
+Chat Trigger ile kullanıcı mesajı alınır
 
-AI Agent (LangChain), kullanıcı mesajını SQL’e çevirir
+AI Agent (LangChain) kullanıcı mesajını analiz eder
 
-Google Gemini Chat Model, dil modeli olarak kullanılır
+Google Gemini Chat Model SQL üretimi için kullanılır
 
-AI Agent sadece geçerli PostgreSQL SELECT sorgusu üretir
+AI Agent yalnızca geçerli PostgreSQL SELECT sorgusu döndürür
 
-Üretilen sorgu Postgres Tool ile veritabanında çalıştırılır
+Üretilen sorgu Postgres Tool ile çalıştırılır
 
 🛠 Kullanılan Teknolojiler
 
 n8n
 
-LangChain (AI Agent)
+LangChain AI Agent
 
 Google Gemini (PaLM) Chat Model
 
@@ -50,14 +50,14 @@ Google Gemini (PaLM) API Key oluşturun
 
 API Key’i n8n Credentials bölümüne ekleyin
 
-PostgreSQL veritabanı bilgilerinizi n8n Credentials’a tanımlayın
+PostgreSQL bağlantı bilgilerini n8n Credentials’a tanımlayın
 
 Workflow’u aktif hale getirin
 
-Chat üzerinden doğal dilde sorgu gönderin
+Chat üzerinden doğal dilde SQL sorgusu gönderin
 
 📁 Workflow Dosyası
 
 workflow/nl2sql-n8n.json
 
-Oluşturan: SwEnesAda 🚀
+Oluşturan: SwEnesAda
